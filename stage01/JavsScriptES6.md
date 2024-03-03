@@ -396,8 +396,8 @@
             - super作为对象时，在普通方法中，指向父类的原型对象，在静态方法中指向父类 【super无法访问到定义再父类实例上的方法或属性】  
             - ES6里，允许继承原声构造函数，然后自定义子类功能
     - Module语法  
-        1. 含义： conmmonjs 运行时加载，效率低，加载整个模块; ES6模块编译时加载，只加载export输出的指定内容；  
-        2. impor和export命令只能在模块顶层，不能在代码块中;   Nodejs的 require() 早就支持， import()方法支持动态加载模块，返回一个Promise对象  
+        1. 含义： CommonJS 运行时加载，效率低，加载整个模块; ES6模块编译时加载，只加载export输出的指定内容；  
+        2. impor和export命令只能在模块顶层，不能在代码块中;   Nodejs有自己对CommonJS的加载方法， import()方法支持动态加载模块，返回一个Promise对象  
         3. import()函数加载适合场合
             - 按需加载  比如点击事件出发后加载
             - 条件加载  放if代码块中
@@ -409,8 +409,8 @@
         2. 浏览器加载ES6模块，`<script type="module" src="./foo.js"></script>`  等同于defer脚本，也可以指明为async属性 
         3. ES6模块与CommanJS模块差异：  
             - CommanJS模块输出的是一个值的拷贝，ES6模块输出的是值的引用
-            - ConmmanJS模块是运行时加载，ES6模块是编译时输出接口
-        4. node.js加载 ，默认是用ConmmanJS处理的，v13.2 开始支持ES6模块
+            - CommanJS模块是运行时加载，ES6模块是编译时输出接口
+        4. node.js加载 ，默认是用CommanJS处理的，v13.2 开始支持ES6模块
             - es6模块 .mjs 【如果不想写这个尾缀，则需要在package.json中设置type为module, .js才会被解释为ES6模块】, commonjs模块 .cjs 
             - main字段， package.json文件有两个字段 main 和 exports 都可以指定模块的入口文件  
             - exports字段优先级 高于 main字段
