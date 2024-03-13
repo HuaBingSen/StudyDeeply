@@ -222,6 +222,7 @@ unix系统是'/', windows系统'\'  类unxi左斜杠， windows 右斜杠
     - request对象
         - `const http = require('http'); `  
         `const server = http.createServer((request, response) => {})`
+        - response.writeHeade方法写入http响应头信息；response.end方法写入http相应内容，以及回应完后关闭本次对话；
         - reqest对象有以下属性
             - url: 发出请求的网址
             - method: http请求方法
@@ -230,7 +231,7 @@ unix系统是'/', windows系统'\'  类unxi左斜杠， windows 右斜杠
     - 服务端可以对data和end两个事件，设置监听函数
         - data事件，数据接收过程中，每收到一段数据就触发一次，接收到的数据被传入回调函数
         - end事件，接受完所有数据后触发
-- http.get(options, res => {})
+- http.get(options, res => {})  options中包含了 host、port、method、path、aget、keepAlive等http请求信息数据
 - http.resuest(options[, callback]) 返回的是一个http.ClientRequest类的实例
 - http.Server()
     - new http.Server()
@@ -270,7 +271,7 @@ unix系统是'/', windows系统'\'  类unxi左斜杠， windows 右斜杠
         - npm install vue-router@latest  | vue-router@x.x.x | vue-router@">=1.1.0 < 0.2.0>"
         - --save -S   | -save-dev  -D
     - npm undate packagename
-    - npm undate -global  packagename
+    - npm undate -global  packagename 
     - npm uninstall
     - package.json的scripts字段中保存了脚本命令
     - npm run 是 npm run-script的简写，都可用

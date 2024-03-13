@@ -1,0 +1,59 @@
+### KOA框架
+- 创作背景： 语法结构进行了升级，使用了generator函数
+- 应用：
+    - Koa应用，包含了一个middleware数组，middleware数组由一组Generator函数组成。
+    - Generator函数负责对HTTP请求进行各种加工
+- 中间件
+    - 必须是Generator函数（async函数也是generator包裹的语法糖，所以也可以是async函数），且是层层调用的。
+    - 中间件通过use方法注册，中间件必须有yiel命令，没有的话不会将执行权往下传递。yield命令处，会暂定执行，同时将执行权递交给yield后面的内容（如果是中间件）
+    - 只要有一个中间件缺少`yield next`语句，后面的中间件都不会执行
+    - 中间件唯一的参数是next,要传入其他参数需要返回另外一个generator函数（闭包的体现）
+    - 多个中间件的合并执行， next参数为下一个中间件， .call(this, next) 返回yield next又继续作为下个call的参数
+        - `function *all(next) {
+            yield random.call(this, backwards.call(this, next))
+        }`
+        - `app.use(all)`
+        - koa内部的koa-compose模块也可合并执行中间件，compose(middlewareArray)
+- 路由
+    - 可以使用中间件函数中的this，this对象包含path、body等
+    - koa-router 提供一系列动词方法
+        - router.get() |  router.post() | router.put() | router.del() | router.patch()
+        - 动词方法接受两个参数， 第一个是 路径模式， 第二个是 对应控制器方法（中间件）;
+        - 1. 给路径起别名 ，或者 2. 路径组合 router.url('user', 3) // /user/3 ,  可以生成动态路径 3. 添加路由前缀prefix
+        - param() 方法 针对命名参数，设置验证条件 配合动态参数校验一起用 router.get('/users/:user', generatorFunc).param('user', generatorFunc)
+        - redirect() 将某个路径请求， 重定向到另外一个路径
+        - context对象
+            - 中间件当中的this表示上下文对象coNtext， 代表一次http请求和回应
+            - context对象的全局属性
+                - request   指向Request对象
+                - resoponse 指向Response对象
+                - req   Node的request对象
+                - res   Node的response对象   
+                - app   App对象
+                - state 用在中间件传递信息
+            - context对象的全局方法
+                - throw(statusCode, errorMsg) 直接抛出错误，决定了HTTP响应的状态码
+                - assert(expression, statusCode, errorMsg)  如果表达式为false,则抛出一个错误
+            - co-body | body-parser?s 三个模块都能解析POST请求数据
+            - 错误处理机制
+                - koa内提供的错误机制，中间件抛出错误会被捕捉到， 引发服务器 向 客户端 返回 500错误，不会导致服务器崩溃
+                - 未捕获的错误，可以设置 error监听函数
+- cookie
+    - cookie的读取和设置
+    - this.cookies.get() 和 this.cookies.set(key, value, options)
+    - > options中的signed参数，标识是否加密cookie, 加密的话，必须指定app.keys数组短语【加密的话，还会发送一个后缀位.sig的同名cookie，后续请求校验】
+    - this.cookie的配置对象的属性
+        - signed: cookie是否加密
+        - expires: 过期时间
+        - path: cookie路径 默认是 "/"
+        - domain： cookie限定的域名
+        - secure cookie是否只在https请求下发送
+        - 是否只要服务器可以取到cookie,默认为true
+- session
+- Request对象
+    - this.request.type 返回http请求的Content-Type属性
+    - this.request.fresh 返回布尔值，表示是否代表最新缓存，通常和 If-None-Match、ETag、If-Modified-Since、Last-Modified等缓存头，配合使用。【stale 不新鲜的，相反属性】
+    - this.request.is(types...) 可以用于过滤http请求，比如只允许用户下载图片 if(this.is('image/*')){}
+    - this.request.accepts(types) 检查HTTP请求的Accept属性是否可接受，如果可接受，则返回指定的媒体类型，否则返回false。
+- Response对象
+- CSRF攻击

@@ -1,2 +1,26 @@
 ### 记录Express框架学习
-- 
+- express就是对nodejs模块进行封装后的一个框架
+    - 其核心： express()方法能返回一个http服务器，就是http模块，且express很多内容都是基于nodejs原生封装的。
+- express.static(__dirname, '/public') 提供静态文件目录，即默认访问node应用程序是访问的目录
+- 中间件：
+    - 含义： 处理http请求的函数。 
+    - 特点: 一个中间件处理完，再传递给下一个中间件，app实例运行过程，会调用一系列中间件
+    - middlewareFnc(req, res, next) { next() }, 像generator函数； 如果next抛出错误则后续中间件不再执行
+    - use() , 是 express注册中间件的方法，next向下递交实例的执行权
+        - app.use((request, response, next) => { }) 可以在use内部回调中对不同request.url做出不同response响应
+        - app.use('/path', middlewareFnc) 也可以指明什么路由用哪个中间件
+- express的方法
+    - all方法 和 http动词方法
+        - app.all("*", (req, res, next)=> {})  all方法，表示所有的请求都必须通过该中间件校验，* 表示对所有路径都生效；
+        - app.get('/', (req, res) => {})  get方法表示只对get请求有效，且get方法的回调函数没有next方法，只要有一个中间件执行力，后续中间件不会执行；动词还有post、put、delete等方法，http请求动词都是
+        - 动词方法允许模式匹配请求路径，使用正则
+    - set方法 指定系统变量的值  `app.set("views", __dirname + "/views")`
+- npx express-generator 指令能在目录下生成express项目模板，且不安装express-generator插件（其实安装了临时的，不过生成项目模板后删除了）
+- response对象
+    - response.redirect(path) 也可以在path前加上301永久重定向的状态码加上
+    - response.sendFile("/path/jizemingbu.avi") 发送文件
+    - response.render()
+- request对象
+    - request.ip 获取http请求ip
+    - request.files 获取上传的文件
+- express.Router() 构造函数能返回一个路由实例，使用该实例的http动词方法，为不同的访问路径，指定回调函数，最后挂在到某个路径

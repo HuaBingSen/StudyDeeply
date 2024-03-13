@@ -1,0 +1,14 @@
+{
+  "name": "koa-demo",
+  "version": "1.0.0",
+  "description": "koa-test",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "koa": "^2.15.0"
+  }
+}
