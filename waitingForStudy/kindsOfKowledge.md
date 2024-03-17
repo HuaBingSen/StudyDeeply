@@ -143,12 +143,40 @@
         - 505 **http version not supported** 服务器不支持请求中使用http版本
         - 508 **loop detected** 服务器在处理请求时检测到无限循环
         - 511 **network authentication required** 客户端需要进行身份验证才能获得网络访问权限
-### 
+- http安全
+    - 内容安全策略CSP ,额外安全层，用于检测并削弱特定类型的攻击，如 XSS和数据注入等攻击
+    - 使用： 服务器需要设置 Content-Security-Policy的标头； 此外 html的meta标签元素也可以设置该策略 `<meta http-equiv="Content-Security-Policy">`
+    -  Content-Security-Policy 标头的设置，Content-Security-Policy： policy
+        - 配置policy，是包含了各种描述CSP策略指令的字符串， 具体指令有如下
+            -   default-src 'selft'  所有内容均来自同一个站点（不包括子域名）
+            -   *.trusted.com 设置来自信任的域及其子域名 (比如 *.koajs.org 信任了该域名及其子域名)
+            -   img-src * 图片可以从任何地方加载
+            -   media-src bilibili.com 媒体文件仅允许从哔哩哔哩加载
+            -   script-src toolscripts.hbsProduct.com 仅允许从该域名下加载脚本
+- 网络缓存问题
+    - 强缓存、协商缓存； 对于这两个概念已熟悉但不够清晰准确，再找文档。
+    - cdn
+    - 还有呢？请具体了解
+- 网络协议，除了比较了解的http协议，tcp/ip协议，其他的协议也应该做了解，了解其在工作中的频率及作用
+    - ssl/tls协议
+        - 概念：
+            - SSL/TLC 密码通信框架，目前使用最广泛的密码通信方式。应用了密码学中的 对称密码、消息认证码、公钥密码、数字签名、伪随机数生成器等。
+                - SSL: secure socket layer,安全套接字层， 1994 netspace公司设计的一套协议， 1995 3.0版本
+                - TLC: transport layer security, 传输层安全，是ssl3.0基础上设计的协议
+        - 应用：http客户端，simple mail transfer protocal【SMTP】简单邮件传输协议及POP3客户端（邮件离线相关），这三个协议 http smpt pop3都会应用ssl/tls协议做安全通信框架
+        - 架构：
+### NodeJs范围
+- nodejs\express\koa，三个框架的官方英文文档，尝试、融入、理解 英文技术文档环境
+- 需要了解nodejs常用的工具
+    - 目前最核心常用的： babel webpack 【编译、打包】、单元测试！ 浏览器端 browerify(偏向于打包层面)
+    - 以及其他工具，从作用分类、主要次要分类、学习成本多少分类
 ### 技术类数据
 - 《写给大家看的设计书》设计相关
 - 《点石成金》 web体验相关
 - 《鸟哥Linux私房菜》
 ### 思想类书籍
 - 《量子力学》的测不准原理，对马克思主义的 对客观世界的认识是不存在的 ？这是一些人的思想，到底是真是假呢？待你考量。 
+- 《人性的弱点》 学习看它是否揭示了人的弱点以及深度，以及学习这些后是否能更好帮助自己克服这些因素来实现自己的自由的发展
 ### 常用插件学习
 - karma 前端测试工具，模拟再多个浏览器测试等
+

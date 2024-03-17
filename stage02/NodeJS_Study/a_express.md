@@ -24,3 +24,17 @@
     - request.ip 获取http请求ip
     - request.files 获取上传的文件
 - express.Router() 构造函数能返回一个路由实例，使用该实例的http动词方法，为不同的访问路径，指定回调函数，最后挂在到某个路径
+- 安全性问题
+    - 不推荐使用或者存在明确漏洞的express版本
+    - 使用tls (transfer layer socket)
+        - 场景：如果应用程序处理或者传输敏感数据， 使用TLS来保护和连接数据，以加密数据，可以防止常见的黑客攻击。
+        - 使用：获取TCS证书，从let's encrypt工具来获取免费证书
+            - 使用helmet(头盔) 【npm中的一个模块】
+                - 可以适当设置http头，免于程序受到web攻击
+                - 常用中间件函数集合
+                    - csp 用于设置 Content-Security-Policy头， 抵御跨站点脚本攻击和其他跨站点注入攻击
+                    - hidePowerBy 移除x-Powered-By头 【该响应头信息展示的是 程序使用的技术框架】
+                    - hsts 用于设置Strict-Transport-Security头，实施安全的服务器连接
+                    - noCache 用于设置 Cache-Control 和 Pragma 头，以禁用客户端高速缓存。
+                    - noSniff 用于设置 X-Content-Type-Options，以防止攻击者以 MIME 方式嗅探浏览器发出的响应中声明的 content-type。
+                    - xssFiler 用于设置 X-XSS-Protection，在最新的 Web 浏览器中启用跨站点脚本编制 (XSS) 过滤器。

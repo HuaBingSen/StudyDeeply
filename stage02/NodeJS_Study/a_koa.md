@@ -56,4 +56,9 @@
     - this.request.is(types...) 可以用于过滤http请求，比如只允许用户下载图片 if(this.is('image/*')){}
     - this.request.accepts(types) 检查HTTP请求的Accept属性是否可接受，如果可接受，则返回指定的媒体类型，否则返回false。
 - Response对象
-- CSRF攻击
+
+### KOA区别于EXPRESS
+- 写法层面： KOA使用generator函数进行改造配合异步函数使用更加方便，使得回调能够链式调用，而express更偏向于传统nodejs事件回调
+- 内容构成：koa不提供路由，只提供第三方路由loa-router或者koa-route, 不提供许多便捷设施， koa更加模块化
+- 中间件：koa对中间件依赖更少
+- 安全性： koa抽象node 的request/response, 减少攻击，更好的用户体验

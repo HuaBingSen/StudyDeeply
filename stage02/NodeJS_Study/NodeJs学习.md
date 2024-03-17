@@ -255,6 +255,7 @@ unix系统是'/', windows系统'\'  类unxi左斜杠， windows 右斜杠
 - 需要require引入buffer, 解构出Buffer对象，处理二进制数据 【建议看nodejs官方文档，这里阮一峰的过时了】
 - const { Buffer } =  require('buffer)
 ### npm包管理器
+- npx 是npm的内置模块，作用：调用项目内安装的模块 | 避免全局安装模块，如使用脚手架类命令安装项目架构但不想安装脚手架（express-generator\create-react-app）
 - npm 1. node开发登记和管理模块 npmjs.org 2. 模块管理器（安装Node后最好将npm更新到最新版本）因为npm可能不是最新的
 - npn init -y 将一个文件目录初始化，生成package.json文件
 - npm cofig set prefix 可指定模块的全局安装目录
@@ -262,6 +263,7 @@ unix系统是'/', windows系统'\'  类unxi左斜杠， windows 右斜杠
 - npm search packageName 搜索npm仓库
 - npm list 列出当前项目安装模块
     - npm list -global 列出全局安装模块
+    - npm root -global 查找npm全局安装模块的本地路径
     - npm list underscore 列出单个模块内容
     - npm install
         - 全局安装 -g 或者 本地项目目录安装
@@ -454,5 +456,7 @@ unix系统是'/', windows系统'\'  类unxi左斜杠， windows 右斜杠
         stream.destroy()
 ### Express框架
 ### Koa框架
+### Eggjs框架，个人认为更重重要***需要学，基于koa,可扩展性很高，专门为企业设计，学习它的思想更为重要
 ### MongoDB应用
- 
+### WebPack
+### Babel 

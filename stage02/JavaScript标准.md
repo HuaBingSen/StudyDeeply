@@ -91,7 +91,7 @@
             1. 简单请求：（1）HEAD, GET, POST中的一种 （2） HTTP头信息不超过xxxx, 简单描述：简单的HTTP方法和简单的HTTP头信息的结合
             *历史原因：表单历史上一直可以发出跨域请求，简单请求就是表单请求，浏览器沿袭传统不复杂化
             Access-Control-Allow-Origin: http://api.bob.com , 该字段必须设置，是 * 或者指定域名
-            Access-Control-Allow-Credentials: true， 可选， 表示是否允许服务器许可，浏览器发送cookie； **如果需要携带cookie请求，则服务器和浏览器端都要设置**，否则只需要服务端设置
+            Access-Control-Allow-Credentials: true， 可选， 表示服务器明确许可，浏览器发送请求可以携带cookie； **如果需要携带cookie请求，则服务器和浏览器端都要设置**，否则只需要服务端设置
             前端开发在AJAX中打开 xhr.withCredentials = true |  axios.defaults.withCredentials = true
             2. 非简单请求
             - 请求方法为PUT或者DELETE,  或者Content-Type字段是application/json。
