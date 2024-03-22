@@ -1,0 +1,65 @@
+- 基础类型
+    - ts提供类型几乎相同于js, 额外多了枚举类型
+        - boolean   `let isDone: boolean = false`
+        - number    和js一样，数字都是浮点数，都支持十进制和十六进制，ts额外支持es6的二进制和八进制    `let binaryLiteral: number = 0b1010`
+        - string    let sentence: string = `hello, my name is ${name}` 支持单双引号和模板字符串
+        - array     let list: number[] = [1,2,3] ; let list: Array<number> = [1,2,3]   // TS中的数组内所有数据必须是同一种数据类型
+        - tuple     元组，允许表示一个已知元素 数量 和类型的数组， let x: [string, number] = ['hello', 10]; 
+        - enum      enum Color { Rad, Green, Blue }; let c: Color = Color.Green; 默认枚举类型从0开始编号，也可以指定其编号 enum Color { Red = 1, Green, Blue }
+        - any       let noteSure: any = 4; 给any类型的数据赋值任何类型都不会报错，且能调用any类型数据上的方法，但不一定会编译成功； let types: any[] = [1, true]
+        - void      let unusable: void = undefined; // void类型的数据，只能是undefined和null
+        - never     表示永不存在的类型，是所有类型的子类型，没有任何类型的值能赋值给never, 即使是any类型的值也不能赋值給never; any型函数： 抛出错误的函数； return Error对象的函数；无法到达重点的函数；
+        - object    对象类型
+        - 类型断言  判断数据类型，对运行时没影响，编译时有影响； 两种写法： <string>someValue; | (someValue as string)    \\ jsx中只有as语法被允许
+- 变量声明
+    讲的var let const 作用域关系
+- 接口
+    - 含义：TS的核心原则是  对值所具有的结构进行类型检查。  接口的作用就是为这些类型命名和为代码或第三方代码定义契约
+    - interfece定义的数据类型，只是用来作类型检查的
+    - 接口里的属性不全是必须的，且顺序不会被TS检查，只要保证属性存在且类型对的
+    - 可选属性， interface SquareConfig { color?: string; width?: number; }  // 注意： TS的interface写法中，对象内的内容是 ';' 结尾
+    - 只读属性  interface Point { readonly x: number; readonly y: number; } | let roa: ReadonlyArray<number> = [1,2,3]; 数组 roa是只读的，不能对他做任何修改；
+    类型断言能重写； a = roa as number []
+    - 额外属性检查  1. as断言能绕过；2. 添加字符串索引签名 也能绕过 interface SquareConfig { color?: string; width?: number; []propName: string: any; }
+    - 函数类型 inferface SearchFunc { (source: string, substring, string): boolean; } // 左边是限定参数类型，右边是限定函数返回值类型； 函数的参数不需要与接口里定义的名字相同匹配
+    - 可索引类型，interface StringArray { [index: number]: string } 定义了该接口，有索引类型为number,返回值是string; TS的索引类型支持两种： 字符串 和 数字。 数字索引其实本质上会转化为字符串索引。 索引签名 也可以设置为 只读，防止给索引赋值； interface StringArray { readonly [index: number]: string }
+    - 类 类型 【如果后续要理解好这个点，可能得去学学Java类的相关概念】
+        - 实现接口类 interface , class, implements 三个一起配合
+        - 继承接口  接口可以多继承
+        - 混合类型   例子： 一个对象可以同时作为 函数 和 对象 使用， 并带有额外属性
+- 类    
+    - 继承，super调用父类构造函数，  子类可以利用super重写继承父类来的方法；
+    - 默认类中的成员属性和方法都是public修饰；  private修饰的成员，不能在声明它的类的外部访问；protected修饰的成员，能够在其派生类中访问，其他与private很相似。
+    - readonly 修饰符， 只读属性 必须在 声明时 或 构造函数里被初始化
+    - get set
+    - 静态属性 只能在类本身上可以访问 static
+    - 抽象类    作为其他派生类的基类使用
+    - 作为构造函数使用
+- 函数
+    - 定义函数类型（定义参数类型 和 函数返回值 类型）:ts能根据返回语句自动推断出返回值类型，因此省略函数返回值类型（实际真如此吗？建议不省略）
+    - 函数完整类型，比较麻烦，定义参数类型和返回值类型且返回值还要写个函数； 
+    - 可选参数 ? ,可选参数只能少不能多, 没传的时候就是undefiend, 可选参数必须放在参数后面！！！； 默认参数 = 赋值，
+    - 剩余参数 function buildName (firstName: string, ...restOfName: string[]) {}
+    - this TS中允许提供一个显示的this参数，this参数是个假的参数， 出现在参数列表的最前面
+    - 重载：同一个函数，根据参数不同类型，做不同处理逻辑；JavaScript中，只能
+- 泛型
+- 枚举
+- 类型推论
+- 类型兼容
+- 高级类型
+- Symbol
+- 迭代器和生成器
+- 模块
+- 命名空间
+- 命名空间和模块
+- 模块解析
+- 声明合并
+- JSX
+- 装饰器
+- Mixins
+- 三斜线指令
+- JavaScript文件类型检查
+#### 声明文件
+- 如何规范编写TS文件
+#### 项目配置
+- 项目里如何配置
