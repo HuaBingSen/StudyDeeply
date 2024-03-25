@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'wxs',
+            arr:[1,2,3],
+            obj:{
+                name:'wxs',
+                age:21
+            }
+        },
+        methods:{
+            change:function () {
+                // 字符串变化
+                this.message = 'vue'
+                // 数组变化
+                // this.arr[1]=100
+                // this.$set(this.arr, 1, 100)
+                // this.arr.length = 10;
+                // this.arr.splice(0,1)
+                // this.arr.push(4);
+                // this.arr.pop()
+
+                // 对象变化
+                // this.obj.name='xxx'
+                // this.obj.hub = '1300dpi'
+                // delete this.obj.age
+                this.$delete(this.obj,'age')
+                //  Object.assign(this.obj, {
+                //     age: 25,
+                //     major: 'soft'
+                //  })
+                //  this.$set(this.obj,'major','Vue')
+                
+            }
+        },
+        watch:{
+            message:function (newValue,oldValue) {
+                console.log('message改变了')
+            },
+            arr: {
+                handler(newVale, oldValue) {
+                    console.log('arr改变了')
+                },
+                deep: true
+            },
+            // function (newValue,oldValue) {
+            //     console.log('arr改变了')
+            // },
+            obj: {
+                handler(newVale, oldValue) {
+                    console.log(newVale, 'obj改变了')
+                },
+                deep: true
+            },
+            // obj:function (newValue,oldValue) {
+            //     console.log('obj改变了')
+            // }
+        },
+        template: `<div><div>{{message}}</div><div>{{arr[1]}}</div><div>{{obj.name}}</div><button @click="change()">改变!</button></div>`
+        })
+    </script>
+</body>
+</html>

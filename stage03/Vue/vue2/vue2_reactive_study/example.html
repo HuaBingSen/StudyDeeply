@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>Price :￥{{ price }}</div>
+        <div>Total:￥{{ price * quantity }}</div>
+        <div>Taxes: ￥{{ totalPriceWithTax }}</div>
+        <button @click="changePrice">改变价格</button>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    price: 5.0,
+                    quantity: 2
+                };
+            },
+            computed: {
+                totalPriceWithTax() {
+                    return this.price * this.quantity * 1.03;
+                }
+            },
+            methods: {
+                changePrice() {
+                    this.price = 10;
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
